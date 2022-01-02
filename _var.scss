@@ -1,0 +1,14 @@
+:root {
+  --bord-size: 350px;
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * 0.9);
+  --mark-color: black;
+  --primary: white;
+}
+$primaryFont: "Lucida Console", "Courier New", monospace;
+
+$bordSize: var(--bord-size);
+$cellSize: var(--cell-size);
+$markSize: var(--mark-size);
+$markColor: var(--mark-color);
+$primaryColor: var(--primary);

@@ -1,0 +1,242 @@
+:root {
+	--bord-size: 350px;
+	--cell-size: 100px;
+	--mark-size: calc(var(--cell-size) * 0.9);
+	--mark-color: black;
+	--primary: white;
+}
+
+*,
+*::before,
+*::after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+.win-class {
+	background-color: #1f8a31;
+}
+
+body {
+	background-color: #333;
+	font-family: 'Lucida Console', 'Courier New', monospace;
+}
+
+.tic_tac_toe {
+	height: 100vh;
+	width: 100vw;
+	min-height: 31rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	position: relative;
+}
+
+.tic_tac_toe .bord-header {
+	text-align: center;
+	color: #fff;
+	margin-bottom: 0.5rem;
+}
+
+.tic_tac_toe .bord-header .turn {
+	text-transform: capitalize;
+}
+
+.tic_tac_toe .bord-header > * {
+	margin-bottom: 0.4rem;
+}
+
+.tic_tac_toe .bord {
+	min-height: var(--bord-size);
+	min-width: var(--bord-size);
+	background-color: var(--primary);
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: repeat(3, auto);
+	grid-template-columns: repeat(3, auto);
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-ms-flex-line-pack: center;
+	align-content: center;
+	justify-items: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.tic_tac_toe .bord .cell {
+	width: var(--cell-size);
+	height: var(--cell-size);
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	position: relative;
+	border: 1px solid var(--mark-color);
+	cursor: pointer;
+}
+
+.tic_tac_toe .bord .cell:first-child,
+.tic_tac_toe .bord .cell:nth-child(2),
+.tic_tac_toe .bord .cell:nth-child(3) {
+	border-top: none;
+}
+
+.tic_tac_toe .bord .cell:nth-child(3n + 1) {
+	border-left: none;
+}
+
+.tic_tac_toe .bord .cell:nth-child(3n + 3) {
+	border-right: none;
+}
+
+.tic_tac_toe .bord .cell:nth-child(1n + 7) {
+	border-bottom: none;
+}
+
+.tic_tac_toe .bord .cell.x::before,
+.tic_tac_toe .bord .cell.o::before,
+.tic_tac_toe .bord .cell.x::after {
+	background-color: var(--mark-color);
+}
+
+.tic_tac_toe .bord.x .cell:not(.x):not(.o):hover::before,
+.tic_tac_toe .bord.x .cell:not(.x):not(.o):hover::after,
+.tic_tac_toe .bord.o .cell:not(.x):not(.o):hover::before {
+	background-color: #cccccc;
+}
+
+.tic_tac_toe .bord .cell.x::before,
+.tic_tac_toe .bord .cell.x::after,
+.tic_tac_toe .bord.x .cell:not(.x):not(.o):hover::before,
+.tic_tac_toe .bord.x .cell:not(.x):not(.o):hover::after {
+	content: '';
+	height: var(--mark-size);
+	width: calc(var(--cell-size) * 0.15);
+	position: absolute;
+}
+
+.tic_tac_toe .bord .cell.x::after,
+.tic_tac_toe .bord.x .cell:not(.x):not(.o):hover::after {
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.tic_tac_toe .bord .cell.x::before,
+.tic_tac_toe .bord.x .cell:not(.x):not(.o):hover::before {
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.tic_tac_toe .bord .cell.o::before,
+.tic_tac_toe .bord .cell.o::after,
+.tic_tac_toe .bord.o .cell:not(.x):not(.o):hover::before,
+.tic_tac_toe .bord.o .cell:not(.x):not(.o):hover::after {
+	content: '';
+	position: absolute;
+	border-radius: 50%;
+}
+
+.tic_tac_toe .bord .cell.o::before,
+.tic_tac_toe .bord.o .cell:not(.x):not(.o):hover::before {
+	height: var(--mark-size);
+	width: var(--mark-size);
+}
+
+.tic_tac_toe .bord .cell.o::after,
+.tic_tac_toe .bord.o .cell:not(.x):not(.o):hover::after {
+	height: calc(var(--mark-size) * 0.7);
+	width: calc(var(--mark-size) * 0.7);
+	background-color: var(--primary);
+}
+
+.tic_tac_toe .bord .cell.x,
+.tic_tac_toe .bord .cell.o {
+	cursor: not-allowed;
+}
+
+.tic_tac_toe .message-box {
+	display: none;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	position: fixed;
+	gap: 1rem 0;
+	opacity: 0.9;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: var(--mark-color);
+	-webkit-transition: 0.5s linear;
+	transition: 0.5s linear;
+	z-index: 10;
+}
+
+.tic_tac_toe .message-box.show {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.tic_tac_toe .message {
+	font-size: 2rem;
+	color: var(--primary);
+	text-transform: uppercase;
+}
+
+.tic_tac_toe .reset-game {
+	background-color: var(--primary);
+	font-size: 1.5rem;
+	color: var(--mark-color);
+	padding: 0.3rem 1.5rem;
+	border: 2px solid var(--primary);
+	border-radius: 0;
+	outline: none;
+	cursor: pointer;
+	-webkit-transition: 0.3s linear;
+	transition: 0.3s linear;
+}
+
+.tic_tac_toe .reset-game:hover {
+	background-color: var(--mark-color);
+	color: var(--primary);
+	-webkit-transition: 0.3s linear;
+	transition: 0.3s linear;
+}
+
+.tic_tac_toe .credit {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0.5rem 2rem;
+	color: var(--primary);
+	font-size: 0.8rem;
+	opacity: 0.5;
+}
+/*# sourceMappingURL=style.css.map */

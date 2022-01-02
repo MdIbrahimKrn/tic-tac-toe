@@ -1,0 +1,184 @@
+@import 'var';
+
+@mixin flex() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+.win-class {
+	background-color: rgb(31, 138, 49);
+}
+body {
+	background-color: #333;
+	font-family: $primaryFont;
+}
+.tic_tac_toe {
+	height: 100vh;
+	width: 100vw;
+	min-height: 31rem;
+	@include flex();
+	flex-direction: column;
+	position: relative;
+	.bord-header {
+		text-align: center;
+		color: #fff;
+		margin-bottom: 0.5rem;
+		.turn {
+			text-transform: capitalize;
+		}
+		& > * {
+			margin-bottom: 0.4rem;
+		}
+	}
+	.bord {
+		min-height: $bordSize;
+		min-width: $bordSize;
+		background-color: $primaryColor;
+		display: grid;
+		grid-template-columns: repeat(3, auto);
+		justify-content: center;
+		align-content: center;
+		justify-items: center;
+		align-items: center;
+
+		.cell {
+			width: $cellSize;
+			height: $cellSize;
+			@include flex();
+			position: relative;
+			border: 1px solid $markColor;
+			cursor: pointer;
+
+			&:first-child,
+			&:nth-child(2),
+			&:nth-child(3) {
+				border-top: none;
+			}
+
+			&:nth-child(3n + 1) {
+				border-left: none;
+			}
+			&:nth-child(3n + 3) {
+				border-right: none;
+			}
+
+			&:nth-child(1n + 7) {
+				border-bottom: none;
+			}
+		}
+
+		.cell.x::before,
+		.cell.o::before,
+		.cell.x::after {
+			background-color: $markColor;
+		}
+
+		&.x .cell:not(.x):not(.o):hover::before,
+		&.x .cell:not(.x):not(.o):hover::after,
+		&.o .cell:not(.x):not(.o):hover::before {
+			background-color: lighten(black, 80);
+		}
+		.cell.x::before,
+		.cell.x::after,
+		&.x .cell:not(.x):not(.o):hover::before,
+		&.x .cell:not(.x):not(.o):hover::after {
+			content: '';
+			height: $markSize;
+			width: calc(var(--cell-size) * 0.15);
+			position: absolute;
+		}
+		.cell.x::after,
+		&.x .cell:not(.x):not(.o):hover::after {
+			transform: rotate(45deg);
+		}
+		.cell.x::before,
+		&.x .cell:not(.x):not(.o):hover::before {
+			transform: rotate(-45deg);
+		}
+
+		.cell.o::before,
+		.cell.o::after,
+		&.o .cell:not(.x):not(.o):hover::before,
+		&.o .cell:not(.x):not(.o):hover::after {
+			content: '';
+			position: absolute;
+			border-radius: 50%;
+		}
+		.cell.o::before,
+		&.o .cell:not(.x):not(.o):hover::before {
+			height: $markSize;
+			width: $markSize;
+		}
+		.cell.o::after,
+		&.o .cell:not(.x):not(.o):hover::after {
+			height: calc(var(--mark-size) * 0.7);
+			width: calc(var(--mark-size) * 0.7);
+			background-color: $primaryColor;
+		}
+
+		.cell.x,
+		.cell.o {
+			cursor: not-allowed;
+		}
+	}
+
+	.message-box {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		gap: 1rem 0;
+		opacity: 0.9;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background-color: $markColor;
+		transition: 0.5s linear;
+		z-index: 10;
+
+		&.show {
+			display: flex;
+		}
+	}
+	.message {
+		font-size: 2rem;
+		color: $primaryColor;
+		text-transform: uppercase;
+	}
+	.reset-game {
+		background-color: $primaryColor;
+		font-size: 1.5rem;
+		color: $markColor;
+		padding: 0.3rem 1.5rem;
+		border: 2px solid $primaryColor;
+		border-radius: 0;
+		outline: none;
+		cursor: pointer;
+		transition: 0.3s linear;
+
+		&:hover {
+			background-color: $markColor;
+			color: $primaryColor;
+			transition: 0.3s linear;
+		}
+	}
+	.credit {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding: 0.5rem 2rem;
+		color: $primaryColor;
+		font-size: 0.8rem;
+		opacity: 0.5;
+	}
+}
