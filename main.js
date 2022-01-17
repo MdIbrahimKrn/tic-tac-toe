@@ -12,7 +12,7 @@ const dataTurn = document.querySelector('[data-turn]');
 const dataHistory = document.querySelector('[data-history]');
 
 let scoreHistory = { x: 0, o: 0, draw: 0 };
-dataTypeEl.checked = false;
+dataTypeEl.checked = true;
 
 const winComb = [
 	[0, 1, 2],
